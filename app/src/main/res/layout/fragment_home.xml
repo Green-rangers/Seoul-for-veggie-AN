@@ -1,14 +1,902 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.HomeFragment">
+        tools:context=".view.HomeFragment"
+        android:background="@color/green_main">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="176dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/logo_long"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+<!--        search bar-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchLayout"
+            android:alpha="0.8"
+            android:layout_width="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_searchbar_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/search_text"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:background="@null"
+                android:hint="Search function"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.233"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_mic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/search_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/all"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.256"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_all"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/all_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:text="All"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chinese"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_chinese"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/chinese_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Chinese\nFood"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/western"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_western"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/western_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Western\nFood"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/asian"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_asean"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/asian_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Asian\nFood"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/eastern"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_estern"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/eastern_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Middle\nEastern"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bakery"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_bakery"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/bakery_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Bakery"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cafe"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_cafe"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/cafe_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Cafe"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mexican"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_mexican"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/mexican_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Mexican\nFood"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/salad"
+                    android:layout_width="72dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_home_item_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_salad"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.3" />
+
+                    <TextView
+                        android:id="@+id/salad_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/suit_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="-4dp"
+                        android:text="Salad"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.8" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="320dp"
+            android:background="@drawable/bg_home_view_radius"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/suit_semibold"
+                android:text="All"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_viewall"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.914"
+                app:layout_constraintStart_toEndOf="@+id/categories"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categories" >
+
+                <ScrollView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:rowCount="2"
+                        android:columnCount="2"
+                        android:orientation="horizontal">
+
+                        <!--            추천 식당 item1-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/item1"
+                            android:layout_width="180dp"
+                            android:layout_height="210dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView"
+                                android:layout_width="156dp"
+                                android:layout_height="156dp"
+                                android:layout_marginTop="7dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="156dp"
+                                    android:layout_height="156dp"
+                                    android:background="@drawable/ic_sample_image">
+
+                                    <ImageView
+                                        android:id="@+id/heart1"
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:src="@drawable/ic_heart"
+                                        app:layout_constraintHorizontal_bias="0.93"
+                                        app:layout_constraintVertical_bias="0.05"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView2"
+                                        android:layout_width="73dp"
+                                        android:layout_height="26dp"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:src="@drawable/ic_distance"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0"
+                                        app:layout_constraintStart_toStartOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/distance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="00"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                                        app:layout_constraintStart_toStartOf="@+id/imageView2"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                                    <TextView
+                                        android:id="@+id/text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="km"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                                        app:layout_constraintStart_toStartOf="@+id/distance"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/restaurants_name1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/suit_semibold"
+                                android:lineSpacingExtra="-2dp"
+                                android:text="Good Pizza Pasta \n Go Go Go Good"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--            추천 식당 item2-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/item2"
+                            android:layout_width="180dp"
+                            android:layout_height="210dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView2"
+                                android:layout_width="156dp"
+                                android:layout_height="156dp"
+                                android:layout_marginTop="7dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="156dp"
+                                    android:layout_height="156dp"
+                                    android:background="@drawable/ic_sample_image">
+
+                                    <ImageView
+                                        android:id="@+id/heart2"
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:src="@drawable/ic_heart"
+                                        app:layout_constraintHorizontal_bias="0.93"
+                                        app:layout_constraintVertical_bias="0.05"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView22"
+                                        android:layout_width="73dp"
+                                        android:layout_height="26dp"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:src="@drawable/ic_distance"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0"
+                                        app:layout_constraintStart_toStartOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/distance2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="00"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView22"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView22"
+                                        app:layout_constraintStart_toStartOf="@+id/imageView22"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView22" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="km"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView22"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView22"
+                                        app:layout_constraintStart_toStartOf="@+id/distance2"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView22" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/restaurants_name2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/suit_semibold"
+                                android:lineSpacingExtra="-2dp"
+                                android:text="Good Pizza Pasta \n Go Go Go Good"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--            추천 식당 item3-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/item3"
+                            android:layout_width="180dp"
+                            android:layout_height="210dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="130dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView3"
+                                android:layout_width="156dp"
+                                android:layout_height="156dp"
+                                android:layout_marginTop="7dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="156dp"
+                                    android:layout_height="156dp"
+                                    android:background="@drawable/ic_sample_image">
+
+                                    <ImageView
+                                        android:id="@+id/heart3"
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:src="@drawable/ic_heart"
+                                        app:layout_constraintHorizontal_bias="0.93"
+                                        app:layout_constraintVertical_bias="0.05"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView3"
+                                        android:layout_width="73dp"
+                                        android:layout_height="26dp"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:src="@drawable/ic_distance"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0"
+                                        app:layout_constraintStart_toStartOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/distance3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="00"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                                        app:layout_constraintStart_toStartOf="@+id/imageView3"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+                                    <TextView
+                                        android:id="@+id/text3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="km"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                                        app:layout_constraintStart_toStartOf="@+id/distance3"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/restaurants_name3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/suit_semibold"
+                                android:lineSpacingExtra="-2dp"
+                                android:text="Good Pizza Pasta \n Go Go Go Good"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--            추천 식당 item4-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/item4"
+                            android:layout_width="180dp"
+                            android:layout_height="210dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="130dp"
+                            android:layout_rowWeight="1"
+                            android:layout_columnWeight="1">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardView4"
+                                android:layout_width="156dp"
+                                android:layout_height="156dp"
+                                android:layout_marginTop="7dp"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="156dp"
+                                    android:layout_height="156dp"
+                                    android:background="@drawable/ic_sample_image">
+
+                                    <ImageView
+                                        android:id="@+id/heart4"
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:src="@drawable/ic_heart"
+                                        app:layout_constraintHorizontal_bias="0.93"
+                                        app:layout_constraintVertical_bias="0.05"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView4"
+                                        android:layout_width="73dp"
+                                        android:layout_height="26dp"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:src="@drawable/ic_distance"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintHorizontal_bias="0"
+                                        app:layout_constraintStart_toStartOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/distance4"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="00"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                                        app:layout_constraintStart_toStartOf="@+id/imageView4"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="1dp"
+                                        android:text="km"
+                                        android:textColor="@color/black"
+                                        android:textSize="12sp"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                                        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                                        app:layout_constraintStart_toStartOf="@+id/distance4"
+                                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/restaurants_name4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/suit_semibold"
+                                android:lineSpacingExtra="-2dp"
+                                android:text="Good Pizza Pasta \n Go Go Go Good"
+                                android:textColor="@color/black"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </GridLayout>
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
