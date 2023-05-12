@@ -28,6 +28,7 @@ import com.greenranger.seoulforveggi.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+//    private lateinit var retService: APIS
     // 선택된 ConstraintLayout을 저장할 변수
     private var selectedView: ConstraintLayout? = null
     //위치 정보 관리자
@@ -40,6 +41,10 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        //retrofit
+//        retService = RetrofitClient
+//            .getRetrofitInstance()
+//            .create(APIS::class.java)
 
         // 위치 관리자 초기화
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -121,8 +126,8 @@ class HomeFragment : Fragment() {
                 val latitude = location.latitude
                 val longitude = location.longitude
 
-                // 위치 정보 사용 예시: latitude와 longitude를 필요한 곳에서 사용
-                Log.d("MyLocation", "Latitude: $latitude, Longitude: $longitude")
+                // 위치 정보
+                Log.d("Home : MyLocation", "Latitude: $latitude, Longitude: $longitude")
 
                 // 서버에 위치 정보를 전송.
 
