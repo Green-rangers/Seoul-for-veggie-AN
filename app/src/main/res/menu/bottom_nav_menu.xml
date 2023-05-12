@@ -17,7 +17,7 @@
         tools:ignore="AlwaysShowAction" />
     <item
         android:id="@+id/mapFragment"
-        android:icon="@drawable/ic_bottom_search_no_select"
+        android:icon="@drawable/ic_bottom_map_no_select"
         app:showAsAction="always"
         android:title="Maps" />
     <item

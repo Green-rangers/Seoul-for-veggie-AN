@@ -10,13 +10,8 @@ import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.greenranger.seoulforveggi.databinding.ActivityMapBinding
-import com.greenranger.seoulforveggi.view.MapFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -38,7 +33,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Check permissions
         if (isPermitted()) {
-            startProcess()
+//            startProcess()
         } else {
             ActivityCompat.requestPermissions(this, permissions, permission_request)
         }
@@ -58,21 +53,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Load the map if permissions are granted
-    fun startProcess() {
-        val fm = supportFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.mapView) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.mapView, it).commit()
-            }
-        mapFragment.getMapAsync(this)
-    }
+//    fun startProcess() {
+//        val fm = supportFragmentManager
+//        val mapFragment = fm.findFragmentById(R.id.mapView) as MapFragment?
+//            ?: MapFragment.newInstance().also {
+//                fm.beginTransaction().add(R.id.mapView, it).commit()
+//            }
+//        mapFragment.getMapAsync(this)
+//    }
 
     // Handle permission request result
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == permission_request) {
             if (isPermitted()) {
-                startProcess()
+//                startProcess()
             } else {
                 finish()
             }
