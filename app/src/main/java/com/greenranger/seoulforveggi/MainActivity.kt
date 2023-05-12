@@ -1,12 +1,12 @@
 package com.greenranger.seoulforveggi
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.greenranger.seoulforveggi.databinding.ActivityMainBinding
 import com.greenranger.seoulforveggi.view.HomeFragment
 import com.greenranger.seoulforveggi.view.KveganFragment
-import com.greenranger.seoulforveggi.view.MapFragment
 import com.greenranger.seoulforveggi.view.MypageFragment
+import com.greenranger.seoulforveggi.view.NaverMapFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -19,11 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         initBottomNavigation()
 
-        //commit test
-//        binding.button.setOnClickListener {
-//            val intent = Intent(this, MapActivity::class.java)
-//            startActivity(intent)
-//        }
+
     }
 
     private fun initBottomNavigation(){
@@ -50,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.mapFragment -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, MapFragment())
+                        .replace(R.id.main_frm, NaverMapFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
