@@ -153,7 +153,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     fun setUpdateLocationListener() {
         val locationRequest = LocationRequest.create()
         locationRequest.run {
-            priority = LocationRequest.PRIORITY_LOW_POWER //GPS 우선
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //정확도 최고로
             interval = 10000 //10초에 한번씩 GPS 요청
         }
 
