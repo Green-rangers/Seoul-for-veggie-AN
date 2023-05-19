@@ -41,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.countrySpinner.adapter = myAdapter
 
-//
+
 //        binding.countrySpinner.setOnClickListener {
 //            val bottomSheetFragment = CountryBottomSheetFragment()
 //            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
