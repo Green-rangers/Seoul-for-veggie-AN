@@ -1,12 +1,13 @@
-package com.greenranger.seoulforveggi
+package com.greenranger.seoulforveggi.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.databinding.ActivityMainBinding
-import com.greenranger.seoulforveggi.view.HomeFragment
-import com.greenranger.seoulforveggi.view.KveganFragment
-import com.greenranger.seoulforveggi.view.MypageFragment
-import com.greenranger.seoulforveggi.view.NaverMapFragment
+import com.greenranger.seoulforveggi.view.fragment.HomeFragment
+import com.greenranger.seoulforveggi.view.fragment.KveganFragment
+import com.greenranger.seoulforveggi.view.fragment.MypageFragment
+import com.greenranger.seoulforveggi.view.fragment.NaverMapFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -18,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initBottomNavigation()
-
-
     }
 
     private fun initBottomNavigation(){
