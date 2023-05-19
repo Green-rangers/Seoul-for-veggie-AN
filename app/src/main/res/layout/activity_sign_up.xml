@@ -136,10 +136,13 @@
             app:layout_constraintTop_toBottomOf="@+id/nationality_title"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <Spinner
-            android:id="@+id/countrySpinner"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+        <ImageView
+            android:id="@+id/country_spinner"
+            android:layout_width="100dp"
+            android:layout_height="18dp"
+            android:foregroundGravity="right"
+            android:src="@drawable/btn_more"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nationality_title" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,7 +152,7 @@
             android:layout_marginStart="@dimen/layout_margin_start"
             android:layout_marginEnd="@dimen/layout_margin_start"
             android:background="@drawable/bg_under_line_gray"
-            app:layout_constraintTop_toBottomOf="@+id/countrySpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/country_spinner" />
 
 
 

@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.greenranger.seoulforveggi.databinding.FragmentMypageBinding
 import com.greenranger.seoulforveggi.retrofit.APIS
-import com.greenranger.seoulforveggi.view.activity.LoginIntroActivity
+import com.greenranger.seoulforveggi.view.activity.SignUpActivity
 import com.greenranger.seoulforveggi.view.base.BaseFragment
 
 
 class MypageFragment : BaseFragment<FragmentMypageBinding>() {
-
 
     private lateinit var retService: APIS
 
@@ -31,7 +30,7 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>() {
 //            .create(APIS::class.java)
 
         binding.goLogin.setOnClickListener {
-            val intent = Intent(activity, LoginIntroActivity::class.java)
+            val intent = Intent(activity, SignUpActivity::class.java)
             startActivity(intent)
         }
     }
