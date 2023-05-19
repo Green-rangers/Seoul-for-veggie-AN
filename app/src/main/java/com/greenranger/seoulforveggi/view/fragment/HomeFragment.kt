@@ -1,4 +1,4 @@
-package com.greenranger.seoulforveggi.view
+package com.greenranger.seoulforveggi.view.fragment
 
 import android.Manifest
 import android.content.Context
@@ -20,14 +20,14 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.databinding.FragmentHomeBinding
+import com.greenranger.seoulforveggi.view.base.BaseFragment
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private lateinit var binding: FragmentHomeBinding
+
 //    private lateinit var retService: APIS
     // 선택된 ConstraintLayout을 저장할 변수
     private var selectedView: ConstraintLayout? = null
@@ -35,12 +35,16 @@ class HomeFragment : Fragment() {
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 123
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
         //retrofit
 //        retService = RetrofitClient
 //            .getRetrofitInstance()
@@ -114,8 +118,6 @@ class HomeFragment : Fragment() {
             //서버에 요청
         }
 
-
-        return binding.root
     }
 
     private fun startLocationUpdates() {

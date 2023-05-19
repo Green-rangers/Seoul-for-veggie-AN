@@ -1,4 +1,4 @@
-package com.greenranger.seoulforveggi.view
+package com.greenranger.seoulforveggi.view.fragment
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -11,17 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.databinding.FragmentNaverMapBinding
+import com.greenranger.seoulforveggi.view.base.BaseFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 
-class NaverMapFragment : Fragment(), OnMapReadyCallback {
-    lateinit var binding: FragmentNaverMapBinding
+class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -32,13 +31,15 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     )
     val permission_request = 99
 
-    override fun onCreateView(
+    override fun getFragmentBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentNaverMapBinding.inflate(inflater, container, false)
-        val view = binding.root
+        container: ViewGroup?
+    ): FragmentNaverMapBinding {
+        return FragmentNaverMapBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // Check permissions
         if (isPermitted()) {
@@ -50,7 +51,6 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         NaverMapSdk.getInstance(requireContext()).client =
             NaverMapSdk.NaverCloudPlatformClient("2s7rl7li7r")
 
-        return view
     }
 
     // Check if permissions are granted
@@ -153,7 +153,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     fun setUpdateLocationListener() {
         val locationRequest = LocationRequest.create()
         locationRequest.run {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //정확도 최고로
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //정확도 높게
             interval = 10000 //10초에 한번씩 GPS 요청
         }
 

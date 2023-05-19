@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MapActivity">
+        tools:context=".view.activity.MapActivity">
 
         <com.naver.maps.map.MapView
             android:id="@+id/mapView"

@@ -1,4 +1,4 @@
-package com.greenranger.seoulforveggi
+package com.greenranger.seoulforveggi.view.activity
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
+import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.databinding.ActivityMapBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
