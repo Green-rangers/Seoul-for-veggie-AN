@@ -137,10 +137,10 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
         binding.mapView.onStop()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.mapView.onDestroy()
-    }
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        binding.mapView.onDestroy()
+//    }
 
     override fun onLowMemory() {
         super.onLowMemory()
