@@ -7,24 +7,13 @@
 
 
     <!-- font size -->
+    <dimen name="font_size_16">16sp</dimen>
     <!--    signup-->
     <dimen name="sign_up_font_large">28sp</dimen>
     <dimen name="sign_up_font_medium">18sp</dimen>
     <dimen name="sign_up_font_hidden">14sp</dimen>
     <dimen name="sign_up_font_small">12sp</dimen>
 
-    <dimen name="font_size_72">72sp</dimen>
-    <dimen name="font_size_36">36sp</dimen>
-    <dimen name="font_size_24">24sp</dimen>
-    <dimen name="font_size_22">22sp</dimen>
-    <dimen name="font_size_20">20sp</dimen>
-    <dimen name="font_size_18">18sp</dimen>
-    <dimen name="font_size_16">16sp</dimen>
-    <dimen name="font_size_15">15sp</dimen>
-    <dimen name="font_size_14">14sp</dimen>
-    <dimen name="font_size_13">13sp</dimen>
-    <dimen name="font_size_12">12sp</dimen>
-    <dimen name="font_size_11">11sp</dimen>
 
     <!-- size -->
     <dimen name="size_0">0dp</dimen>

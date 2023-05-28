@@ -6,57 +6,204 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_greenwhite">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/my_profile_image"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="60dp"
-            android:src="@drawable/ic_profile"
+            android:id="@+id/imageView5"
+            android:layout_width="176dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/iv_gray_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/my_profile_image"
+            android:layout_width="146dp"
+            android:layout_height="146dp"
+            android:layout_marginTop="67dp"
+            android:layout_marginEnd="@dimen/size_14"
+            android:src="@drawable/iv_mypage1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--        My pick-->
+        <ImageView
             android:id="@+id/go_login"
             android:layout_width="180dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/ic_go_login"
-            app:layout_constraintBottom_toBottomOf="@+id/my_profile_image"
-            app:layout_constraintStart_toEndOf="@+id/my_profile_image"
-            app:layout_constraintTop_toTopOf="@+id/my_profile_image" />
-
-<!--        My pick-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/my_pick_layout"
-            android:layout_width="match_parent"
             android:layout_height="108dp"
+            android:src="@drawable/ic_go_google"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/size_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <TextView
+            android:id="@+id/textView"
+            ivvisibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/size_24"
+            android:fontFamily="@font/suit_semibold"
+            android:text="HI, "
+            android:textColor="@color/gray_1E2321"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/size_36"
+            android:layout_marginEnd="@dimen/layout_margin_start"
+            android:background="@color/gray_layout"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/suit_semibold"
+            android:text="My Profile"
+            android:textColor="@color/gray_700"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="33dp"
+            android:fontFamily="@font/suit_semibold"
+            android:text="My Contents"
+            android:textColor="@color/gray_700"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_profile_layout" />
+
+        <TextView
+            android:id="@+id/my_nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/suit_extrabold"
+            android:text="오태식이"
+            android:textColor="@color/gray_1E2321"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:fontFamily="@font/suit_semibold"
+            android:text="look for a vegan \nfood in Seoul"
+            android:textColor="@color/gray_1E2321"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <!--    my profile-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginTop="@dimen/size_16"
+            android:background="@drawable/bg_mypage_item_radius"
+            android:elevation="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.258"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0">
+
+            <TextView
+                android:id="@+id/my_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_12"
+                android:layout_marginTop="21dp"
+                android:fontFamily="@font/suit_bold"
+                android:text="My picks"
+                android:textColor="@color/gray_1E2321"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_12"
+                android:layout_marginTop="4dp"
+                android:text="Nationality"
+                android:textColor="@color/gray_500"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/my_profile" />
+
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="@dimen/size_52"
+                android:layout_height="@dimen/size_52"
+                android:layout_marginStart="@dimen/layout_margin_start"
+                android:src="@drawable/iv_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_go_login"
+                android:layout_width="68dp"
+                android:layout_height="@dimen/size_32"
+                android:layout_marginEnd="@dimen/layout_margin_start"
+                android:src="@drawable/btn_go_login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        my picks-->
+
+        <!--        My review-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_pick_layout"
+            android:layout_width="156dp"
+            android:layout_height="174dp"
+            android:layout_marginStart="@dimen/size_20"
+            android:layout_marginTop="@dimen/size_16"
             android:background="@drawable/bg_mypage_item_radius"
-            android:elevation="6dp">
+            android:elevation="6dp"
+            app:layout_constraintEnd_toStartOf="@+id/my_review_layout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <TextView
                 android:id="@+id/my_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_start"
                 android:fontFamily="@font/suit_bold"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
                 android:text="My picks"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
             <ImageView
                 android:id="@+id/go_pick"
@@ -68,60 +215,55 @@
                 app:layout_constraintStart_toEndOf="@+id/my_pick"
                 app:layout_constraintTop_toTopOf="@+id/my_pick" />
 
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/layout_margin_start"
+                android:layout_marginTop="12dp"
                 android:text="Check out the vegetarian \nrestaurant I saved"
                 android:textColor="@color/gray_500"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/my_pick" />
 
-
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/layout_margin_start"
+                android:layout_marginTop="@dimen/size_11"
                 android:src="@drawable/ic_mypick"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--        My review-->
+        <!--        my review-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="108dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
+            android:id="@+id/my_review_layout"
+            android:layout_width="156dp"
+            android:layout_height="174dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="@dimen/size_16"
+            android:layout_marginEnd="@dimen/size_20"
             android:background="@drawable/bg_mypage_item_radius"
             android:elevation="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_pick_layout"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/my_pick_layout"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
 
             <TextView
                 android:id="@+id/my_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 android:fontFamily="@font/suit_bold"
                 android:text="My reviews"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
             <ImageView
                 android:id="@+id/go_review"
@@ -134,7 +276,7 @@
                 app:layout_constraintTop_toTopOf="@+id/my_review" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
@@ -146,15 +288,11 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="20dp"
+                android:layout_width="@dimen/size_56"
+                android:layout_height="@dimen/size_56"
+                android:layout_marginStart="@dimen/layout_margin_start"
+                android:layout_marginTop="@dimen/size_11"
                 android:src="@drawable/ic_myreview"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
