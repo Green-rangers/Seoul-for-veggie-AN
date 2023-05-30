@@ -24,7 +24,7 @@ interface HomeService {
         @Query("longitude") longitude: Double
     ): Response<RecommendationResponse>
 
-    @GET("/api/restaurant/{식당id}")
+    @GET("/api/restaurant/{id}")
     suspend fun restaurantDetail(
         @Path("id") id: Int
     ): Response<DetailResponse>

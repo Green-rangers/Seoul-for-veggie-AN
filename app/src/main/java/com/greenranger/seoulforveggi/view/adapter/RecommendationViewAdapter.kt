@@ -46,23 +46,23 @@ class RecommendationViewAdapter(
 
         fun bind(place: RecommendationResponse.Restaurant, clickListener: (RecommendationResponse.Restaurant) -> Unit) {
             // UI elements setup
-            name.text = place.name
-            category.text = place.category
-            address.text = place.address
-            distance.text = place.distance.toString()
+            name.text = place.name ?: ""
+            category.text = place.category ?: ""
+            val formattedContent = place.address.chunked(40).joinToString("\n")
+            address.text = formattedContent
+            distance.text = place.distance?.toString() ?: ""
 
-            if (place.imageLink.isNotEmpty()) {
+            if (!place.imageLink.isNullOrEmpty()) {
                 Glide.with(view)
                     .load(place.imageLink)
                     .into(placeImg)
             }
 
-            if(place.isBookmarked) {
+            if(place.isBookmarked == true) {
                 heart1.setImageResource(R.drawable.ic_heart_on)
             } else {
                 heart1.setImageResource(R.drawable.ic_heart)
             }
-
 
             view.setOnClickListener {
                 clickListener(place)

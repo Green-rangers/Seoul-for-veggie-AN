@@ -486,15 +486,14 @@
 
 
             <ImageView
+                android:id="@+id/view_all"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/ic_viewall"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/size_16"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_viewall"
+                app:layout_constraintBottom_toBottomOf="@+id/categories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/categories"
                 app:layout_constraintVertical_bias="0" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

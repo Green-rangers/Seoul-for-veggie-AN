@@ -29,18 +29,13 @@ class RecommendationViewModel(
     fun fetchPlaces(keyword: String, latitude: Double, longitude: Double) {
         retService = RetrofitClient.getRetrofitInstance().create(HomeService::class.java)
 
-//        val request = RecommendationRequest(
-//            category2 = category2,
-//            filters = filters,
-//            orderBy = orderBy
-//        )
-
         viewModelScope.launch {
             try {
                 val response = retService.recommendationRestaurant(keyword, latitude, longitude)
                 if (response.isSuccessful) {
                     val data = response.body()?.restaurantList
                     Log.d("RecommendationViewModel", "Fetch places success")
+                    _places.postValue(data!!) // Add this line to update LiveData
                 } else {
                     Log.e("RecommendationViewModel", "Fetch places failed: ${response.errorBody()?.string()}")
                 }
