@@ -26,6 +26,18 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
 //        retService = RetrofitClient
 //            .getRetrofitInstance()
 //            .create(APIS::class.java)
+
+        binding.btnGoSeeMore.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(this.id, KoreanVegetarianFoodFragment())
+            transaction?.commit()
+        }
+
+        binding.viewall.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(this.id, KoreanRestaurantFragment())
+            transaction?.commit()
+        }
     }
 
 }
