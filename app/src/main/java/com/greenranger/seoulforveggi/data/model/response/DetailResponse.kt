@@ -13,4 +13,11 @@ data class DetailResponse(
     val phone: String,
     val rating: Double,
     val reviewList: List<Review>
-)
+) {
+    data class Review(
+        val content: String,
+        val id: Int,
+        val writerImage: String,
+        val writerName: String
+    )
+}

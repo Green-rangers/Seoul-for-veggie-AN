@@ -2,10 +2,9 @@ package com.greenranger.seoulforveggi.data.model.request
 
 
 import androidx.annotation.Keep
-import com.google.gson.annotations.SerializedName
 
 @Keep
 class LoginRequest (
-    @SerializedName("idToken")
-    private val idToken: String
+    private val email: String,
+    private val imageLink: String
 )

@@ -15,12 +15,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.greenranger.seoulforveggi.GlobalApplication
 import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.data.network.HomeService
 import com.greenranger.seoulforveggi.databinding.FragmentHomeBinding
@@ -31,7 +33,6 @@ import kotlinx.coroutines.launch
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-
 
     private lateinit var retService: HomeService
 
@@ -83,6 +84,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         callRestaurantListAPI("All", homelatitude, homelongitude)
 
+        //검색
+        binding.searchText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                val enteredText = binding.searchText.text.toString()
+                // 여기서 enteredText를 저장하거나 처리합니다.
+                // 예를 들어, ViewModel이나 SharedPreferences를 사용하여 저장할 수 있습니다.
+                Toast.makeText(requireContext(), "입력된 값: $enteredText", Toast.LENGTH_SHORT).show()
+                GlobalApplication.prefs.setString("myCategory", enteredText)
+
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+
 
         //all 카테고리 선택으로 초기화
         binding.all.setBackgroundResource(R.drawable.bg_home_item_radius_click)
@@ -91,11 +106,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //      각 ConstraintLayout에 클릭 리스너를 등록합니다.
         binding.all.setOnClickListener {
             onViewClicked(binding.all)
-            binding.categories.text = "All"
+            binding.categories.text = "Nearby"
             //서버에 요청
             category = "All"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-
         }
         binding.chinese.setOnClickListener {
             onViewClicked(binding.chinese)
@@ -103,7 +117,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "ChineseFood"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-
         }
         binding.western.setOnClickListener {
             onViewClicked(binding.western)
@@ -154,7 +167,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             category = "Salad"
             callRestaurantListAPI(category, homelatitude, homelongitude)
         }
-
 
         //detailFragment로 이동
         binding.cardView.setOnClickListener {
@@ -253,6 +265,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         // 위치 정보 업데이트 처리
         homelatitude = location.latitude
         homelongitude = location.longitude
+
+        val myLatitude = homelatitude.toString()
+        val myLongitude = homelongitude.toString()
+
+        Log.d("Home : MyLocation1", "Latitude: $myLatitude, Longitude: $myLongitude")
 
         // 위치 정보
         Log.d("Home : MyLocation", "Latitude: $homelatitude, Longitude: $homelongitude")

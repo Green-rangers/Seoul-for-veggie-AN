@@ -33,8 +33,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="126dp"
-                android:layout_height="126dp"
-                android:background="@drawable/ic_sample_image">
+                android:layout_height="126dp">
+
+                <ImageView
+                    android:id="@+id/iv_restaurant_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_sample_image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <ImageView
                     android:id="@+id/heart1"
