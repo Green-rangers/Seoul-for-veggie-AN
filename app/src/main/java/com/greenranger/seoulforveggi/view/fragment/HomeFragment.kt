@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     var id2: Int = 1
     var id3: Int = 1
     var id4: Int = 1
-    private var category: String = "All"
+    private var category: String = "a"
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -60,6 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var detailFragment: DetailRestaurantFragment? = null
+        GlobalApplication.prefs.setString("myCategory", "a")
 
         // 위치 관리자 초기화
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -110,6 +111,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "All"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "a")
         }
         binding.chinese.setOnClickListener {
             onViewClicked(binding.chinese)
@@ -117,6 +119,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "ChineseFood"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "ChineseFood")
         }
         binding.western.setOnClickListener {
             onViewClicked(binding.western)
@@ -124,6 +127,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "WesternFood"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "WesternFood")
         }
         binding.asian.setOnClickListener {
             onViewClicked(binding.asian)
@@ -131,6 +135,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "AseanFood"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "AseanFood")
         }
         binding.eastern.setOnClickListener {
             onViewClicked(binding.eastern)
@@ -138,6 +143,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "MiddleEastern"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "MiddleEastern")
         }
         binding.bakery.setOnClickListener {
             onViewClicked(binding.bakery)
@@ -145,6 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "Bakery"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "Bakery")
         }
         binding.cafe.setOnClickListener {
             onViewClicked(binding.cafe)
@@ -152,6 +159,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "Cafe"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "Cafe")
         }
         binding.mexican.setOnClickListener {
             onViewClicked(binding.mexican)
@@ -159,6 +167,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "MexicanFood"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "MexicanFood")
         }
         binding.salad.setOnClickListener {
             onViewClicked(binding.salad)
@@ -166,6 +175,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "Salad"
             callRestaurantListAPI(category, homelatitude, homelongitude)
+            GlobalApplication.prefs.setString("myCategory", "Salad")
         }
 
         //detailFragment로 이동
@@ -181,6 +191,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         binding.cardView4.setOnClickListener {
             openRestaurantRecommendationFragment(id4)
+        }
+
+        binding.viewAll.setOnClickListener{
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(this.id, RecommendRestaurantFragment())
+            transaction?.addToBackStack(null)
+            transaction?.commit()
         }
 
     }

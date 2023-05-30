@@ -19,6 +19,11 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
 
     private lateinit var retService: HomeService
 
+    var id1: Int = 1
+    var id2: Int = 1
+    var id3: Int = 1
+    var id4: Int = 1
+
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -53,6 +58,21 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
 
         val category = "KoreanFood"
         callRestaurantListAPI(category, myLatitude, myLongitude)
+
+        //detailFragment로 이동
+        binding.cardView.setOnClickListener {
+            openRestaurantRecommendationFragment(id1)
+
+        }
+        binding.cardView2.setOnClickListener {
+            openRestaurantRecommendationFragment(id2)
+        }
+        binding.cardView3.setOnClickListener {
+            openRestaurantRecommendationFragment(id3)
+        }
+        binding.cardView4.setOnClickListener {
+            openRestaurantRecommendationFragment(id4)
+        }
     }
 
     private fun callRestaurantListAPI(category: String, latitude: Double, longitude: Double){
@@ -71,7 +91,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
                     //distance
                     binding.distance.text = "${restaurantListData?.get(0)?.distance}"
                     //id
-                    var id1 = restaurantListData?.get(0)?.id!!.toInt()
+                    id1 = restaurantListData?.get(0)?.id!!.toInt()
 
                     //image
                     if(restaurantListData?.get(0)?.imageLink != null){
@@ -96,7 +116,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
                     //distance
                     binding.distance2.text = "${restaurantListData?.get(1)?.distance}"
                     //id
-                    var id2 = restaurantListData?.get(1)?.id!!.toInt()
+                    id2 = restaurantListData?.get(1)?.id!!.toInt()
 
                     //image
                     if(restaurantListData?.get(1)?.imageLink != null){
@@ -121,7 +141,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
                     //distance
                     binding.distance3.text = "${restaurantListData?.get(2)?.distance}"
                     //id
-                    var id3 = restaurantListData?.get(2)?.id!!.toInt()
+                    id3 = restaurantListData?.get(2)?.id!!.toInt()
 
                     //image
                     if(restaurantListData?.get(2)?.imageLink != null){
@@ -146,7 +166,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
                     //distance
                     binding.distance4.text = "${restaurantListData?.get(3)?.distance}"
                     //id
-                    var id4 = restaurantListData?.get(3)?.id!!.toInt()
+                    id4 = restaurantListData?.get(3)?.id!!.toInt()
 
                     //image
                     if(restaurantListData?.get(3)?.imageLink != null){
@@ -178,6 +198,20 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
                 Log.e("Home 실패2", "Exception: ${e.message}")
             }
         }
+    }
+
+    private fun openRestaurantRecommendationFragment(id: Int) {
+        val detailRestaurantFragment = DetailRestaurantFragment()
+
+        val bundle = Bundle().apply {
+            putInt("id", id)
+        }
+        detailRestaurantFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, detailRestaurantFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }
