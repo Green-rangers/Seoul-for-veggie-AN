@@ -11,9 +11,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.greenranger.seoulforveggi.Constants.GOOGLE_CLIENT_ID
+import com.greenranger.seoulforveggi.GlobalApplication
+import com.greenranger.seoulforveggi.data.model.request.LoginRequest
+import com.greenranger.seoulforveggi.data.network.LoginService
 import com.greenranger.seoulforveggi.databinding.ActivitySigninBinding
-import com.greenranger.seoulforveggi.retrofit.APIS
 import com.greenranger.seoulforveggi.retrofit.RetrofitClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SigninActivity : AppCompatActivity() {
 
@@ -23,7 +28,8 @@ class SigninActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySigninBinding
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var retService: APIS
+    private lateinit var retService: LoginService
+    private var userEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +37,14 @@ class SigninActivity : AppCompatActivity() {
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userEmail = GlobalApplication.prefs.getString("userEmail", "null")
+
         //retrofit
         retService = RetrofitClient
             .getRetrofitInstance()
-            .create(APIS::class.java)
+            .create(LoginService::class.java)
 
         // Configure Google Sign-In options
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(GOOGLE_CLIENT_ID)
             .requestEmail()
@@ -70,15 +77,19 @@ class SigninActivity : AppCompatActivity() {
                     val idToken = it.idToken
                     val authorizationCode = it.serverAuthCode
                     val email = it.email
-                    val displayName = it.displayName
                     val profilePhotoUrl = it.photoUrl
+
+                    GlobalApplication.prefs.setString("userEmail", email.toString())
+                    GlobalApplication.prefs.setString("userProfilePhotoUrl", profilePhotoUrl.toString())
 
                     Log.d("SigninActivity successful", "idToken: $idToken ,Authorization Code: $authorizationCode ,email: $email, profilePhotoUrl: $profilePhotoUrl")
                     // Perform any additional actions or API calls with the obtained information
 
+                    CoroutineScope(Dispatchers.IO).launch {
+                        login(email.toString(), profilePhotoUrl.toString())
+                    }
+
                     // Load and display the profile photo using an image loading library like Glide or Picasso
-
-
                 }
                 Log.d("SigninActivity successful", "Google Sign-In was successful!")
             } else {
@@ -93,6 +104,49 @@ class SigninActivity : AppCompatActivity() {
         } catch (e: Exception) {
             // Handle other exceptions
             Log.e("SigninActivity", "Error during Google Sign-In: ${e.message}")
+        }
+    }
+
+    private suspend fun login(email: String, imageLink: String) {
+        val requestBody = LoginRequest(email, imageLink)
+
+        try {
+            val response = retService.login(requestBody)
+            if (response.isSuccessful) {
+                // 요청 성공
+                Log.d("로그인 추가정보 통신 성공, 요청 성공", response.toString())
+                Log.d("로그인 추가정보 통신 성공, 요청 성공", response.body().toString())
+                //acessToken보내기
+                val myAccessToken = response.body()?.accessToken
+
+                // useraccesstoken 속성 사용
+                val accessToken = myAccessToken.toString()
+                GlobalApplication.prefs.setString("userAccessToken", accessToken)
+                // accessToken 변수 출력
+                println("Access token: $accessToken")
+
+                userEmail = GlobalApplication.prefs.getString("userEmail", "null")
+
+                if(userEmail == "null") {
+                    //SignUpActivity로 이동
+                    val intent = Intent(this, SignUpActivity::class.java)
+                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    finish()
+                } else {
+                    //MainActivity로 이동
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                    finish()
+                }
+
+            } else {
+                // 요청 실패
+                Log.d("로그인 통신 성공, 요청 실패", response.toString())
+                Log.d("로그인 통신 성공, 요청 실패", response.body().toString())
+            }
+        } catch (e: Exception) {
+            // 네트워크 에러 또는 예외 발생
+            Log.d("로그인 통신 실패", "전송 실패")
         }
     }
 }
