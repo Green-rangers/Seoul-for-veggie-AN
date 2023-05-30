@@ -44,6 +44,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var detailFragment: DetailRestaurantFragment? = null
+
         // Inflate the layout for this fragment
         //retrofit
 //        retService = RetrofitClient
@@ -76,6 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             onViewClicked(binding.all)
             binding.categories.text = "All"
             //서버에 요청
+
              }
         binding.chinese.setOnClickListener {
             onViewClicked(binding.chinese)
@@ -116,6 +119,57 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             onViewClicked(binding.salad)
             binding.categories.text = "Salad"
             //서버에 요청
+        }
+
+
+        //detailFragment로 이동
+        binding.cardView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", 1)
+            }
+            detailFragment?.let {
+                it.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, it)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+        binding.cardView2.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", 1)
+            }
+            detailFragment?.let {
+                it.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, it)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+        binding.cardView3.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", 1)
+            }
+            detailFragment?.let {
+                it.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, it)
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
+        binding.cardView4.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("id", 1)
+            }
+            detailFragment?.let {
+                it.arguments = bundle
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, it)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
     }

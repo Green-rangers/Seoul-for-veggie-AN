@@ -22,8 +22,8 @@ class CountryBottomSheetFragment : BottomSheetDialogFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_country_bottom_sheet, container, false)
 
-        val countryOption1: TextView = view.findViewById(R.id.country_option_1)
-        val countryOption2: TextView = view.findViewById(R.id.country_option_2)
+        val countryOption1: TextView = view.findViewById(R.id.New_Zealand)
+        val countryOption2: TextView = view.findViewById(R.id.Taiwan)
 
         countryOption1.setOnClickListener {
             setFragmentResult("requestKey", bundleOf("bundleKey" to "Country 1"))

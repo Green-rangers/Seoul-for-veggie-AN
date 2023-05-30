@@ -51,6 +51,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
         NaverMapSdk.getInstance(requireContext()).client =
             NaverMapSdk.NaverCloudPlatformClient("2s7rl7li7r")
 
+        binding.cardView.visibility = View.GONE
+
     }
 
     // Check if permissions are granted
