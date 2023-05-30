@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "605518231967",
+    "project_id": "seoulforveggie",
+    "storage_bucket": "seoulforveggie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605518231967:android:5fb2c234279e3afafe65aa",
+        "android_client_info": {
+          "package_name": "com.greenranger.seoulforveggi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605518231967-i0c0a57abmg59nqtcdvpmsaufu260ano.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.greenranger.seoulforveggi",
+            "certificate_hash": "5ff3e248db6113757c458b36382d0509b80c5fe8"
+          }
+        },
+        {
+          "client_id": "605518231967-vkvkodgv1n3i1koildmr4i52kla872u3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.greenranger.seoulforveggi",
+            "certificate_hash": "6431c7bddf232804b622327694964926cdfcbbcc"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCINdfAgqD_f_bmZZWvAecuuvI3vc1zsVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

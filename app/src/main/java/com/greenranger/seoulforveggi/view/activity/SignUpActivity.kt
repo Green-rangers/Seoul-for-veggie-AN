@@ -25,7 +25,7 @@ class SignUpActivity : AppCompatActivity() {
         colorSpan.setSpan(
             ForegroundColorSpan(ContextCompat.getColor(this, R.color.green_main)),
             0, // 시작 인덱스
-            15, // 끝 인덱스
+            16, // 끝 인덱스
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         binding.signUpTitle.text = colorSpan

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.greenranger.seoulforveggi.databinding.FragmentDetailRestaurantBinding
 import com.greenranger.seoulforveggi.retrofit.APIS
+import com.greenranger.seoulforveggi.retrofit.RetrofitClient
 import com.greenranger.seoulforveggi.view.base.BaseFragment
 
 class DetailRestaurantFragment : BaseFragment<FragmentDetailRestaurantBinding>() {
@@ -24,10 +25,10 @@ class DetailRestaurantFragment : BaseFragment<FragmentDetailRestaurantBinding>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var id: Int = 1
-        //retrofit
-//        retService = RetrofitClient
-//            .getRetrofitInstance()
-//            .create(APIS::class.java)
+//        retrofit
+        retService = RetrofitClient
+            .getRetrofitInstance()
+            .create(APIS::class.java)
 
         val id_value = arguments?.getInt("id", 1)
         if (id_value != null) {

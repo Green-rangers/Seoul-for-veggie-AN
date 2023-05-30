@@ -1,6 +1,7 @@
 package com.greenranger.seoulforveggi.retrofit
 
 import com.google.gson.GsonBuilder
+import com.greenranger.seoulforveggi.Constants.SeoulForVeggi_BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +11,6 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitClient {
     companion object {
-        val BASE_URL = ""
 
         val interceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
@@ -25,7 +25,7 @@ class RetrofitClient {
 
         fun getRetrofitInstance(): Retrofit {
             return Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(SeoulForVeggi_BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build()
