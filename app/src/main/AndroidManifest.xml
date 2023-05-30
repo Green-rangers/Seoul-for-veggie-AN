@@ -21,9 +21,21 @@
         <activity
             android:name=".view.activity.SignUpActivity"
             android:exported="false" />
+
         <activity
-            android:name=".view.activity.LoginIntroActivity"
+            android:name=".view.activity.SigninActivity"
+            android:exported="false">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        </activity>
+
+        <!-- Google 로그인 인증 요청 -->
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="false" />
+
         <activity
             android:name=".view.activity.MapActivity"
             android:exported="false">
