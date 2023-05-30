@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -113,5 +114,10 @@ dependencies {
 
     //구글 지도
     implementation("com.google.android.gms:play-services-location:18.0.0")
+
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
