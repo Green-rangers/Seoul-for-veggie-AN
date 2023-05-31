@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.fragment.MyPickFragment">
+    tools:context=".view.fragment.MyReviewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/suit_regular"
-                android:text="My picks"
+                android:text="My reviews"
                 android:textColor="@color/black_500"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -53,11 +53,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
-            tools:listitem="@layout/review_item" />
+            tools:listitem="@layout/my_review_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </layout>

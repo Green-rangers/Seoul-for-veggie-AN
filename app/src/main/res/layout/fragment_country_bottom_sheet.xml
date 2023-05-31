@@ -2,156 +2,200 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/bg_home_view_radius"
     tools:context=".view.fragment.CountryBottomSheetFragment">
 
-        <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:background="@drawable/bg_home_view_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/New_Zealand"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="New Zealand" />
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/Taiwan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Taiwan" />
+                <TextView
+                    android:id="@+id/New_Zealand"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:background="@drawable/bg_home_view_radius"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:gravity="left|center_vertical"
+                    android:text="New Zealand" />
 
-            <TextView
-                android:id="@+id/Germany"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Germany" />
+                <TextView
+                    android:id="@+id/Taiwan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Taiwan" />
 
-            <TextView
-                android:id="@+id/Russia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Russia" />
+                <TextView
+                    android:id="@+id/South_Korea"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="South Korea" />
 
-            <TextView
-                android:id="@+id/United_States"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="United States" />
+                <TextView
+                    android:id="@+id/Germany"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Germany" />
 
-            <TextView
-                android:id="@+id/Vietnam"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Vietnam" />
+                <TextView
+                    android:id="@+id/Russia"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Russia" />
 
-            <TextView
-                android:id="@+id/Spain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Spain" />
+                <TextView
+                    android:id="@+id/United_States"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="United States" />
 
-            <TextView
-                android:id="@+id/Singapore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Singapore" />
+                <TextView
+                    android:id="@+id/Vietnam"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Vietnam" />
 
-            <TextView
-                android:id="@+id/United_Arab_Emirates"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="United Arab Emirates" />
+                <TextView
+                    android:id="@+id/Spain"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Spain" />
 
-            <TextView
-                android:id="@+id/United_Kingdom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="United Kingdom" />
+                <TextView
+                    android:id="@+id/Singapore"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Singapore" />
 
-            <TextView
-                android:id="@+id/India"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="India" />
+                <TextView
+                    android:id="@+id/United_Arab_Emirates"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="United Arab Emirates" />
 
-            <TextView
-                android:id="@+id/Japan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Japan" />
+                <TextView
+                    android:id="@+id/United_Kingdom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="United Kingdom" />
 
-            <TextView
-                android:id="@+id/China"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="China" />
+                <TextView
+                    android:id="@+id/India"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="India" />
 
-            <TextView
-                android:id="@+id/Kazakhstan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Kazakhstan" />
+                <TextView
+                    android:id="@+id/Japan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Japan" />
 
-            <TextView
-                android:id="@+id/Canada"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Canada" />
+                <TextView
+                    android:id="@+id/China"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="China" />
 
-            <TextView
-                android:id="@+id/Thailand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Thailand" />
+                <TextView
+                    android:id="@+id/Kazakhstan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Kazakhstan" />
 
-            <TextView
-                android:id="@+id/France"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="France" />
+                <TextView
+                    android:id="@+id/Canada"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Canada" />
 
-            <TextView
-                android:id="@+id/Philippines"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Philippines" />
+                <TextView
+                    android:id="@+id/Thailand"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Thailand" />
 
-            <TextView
-                android:id="@+id/Australia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Australia" />
+                <TextView
+                    android:id="@+id/France"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="France" />
 
-            <TextView
-                android:id="@+id/Hong_Kong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Hong Kong" />
+                <TextView
+                    android:id="@+id/Philippines"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Philippines" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/Australia"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_56"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Australia" />
+
+                <TextView
+                    android:id="@+id/Hong_Kong"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/suit_semibold"
+                    android:padding="16dp"
+                    android:text="Hong Kong" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

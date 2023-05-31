@@ -3,6 +3,7 @@ package com.greenranger.seoulforveggi.view.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -84,7 +85,7 @@ class SigninActivity : AppCompatActivity() {
 
                     Log.d("SigninActivity successful", "idToken: $idToken ,Authorization Code: $authorizationCode ,email: $email, profilePhotoUrl: $profilePhotoUrl")
                     // Perform any additional actions or API calls with the obtained information
-
+                    Toast.makeText(this, "Sign-in successful!", Toast.LENGTH_SHORT).show()
                     CoroutineScope(Dispatchers.IO).launch {
                         login(email.toString(), profilePhotoUrl.toString())
                     }
@@ -96,14 +97,17 @@ class SigninActivity : AppCompatActivity() {
                 // Sign-in failed, handle the exception
                 val exception = completedTask.exception
                 Log.e("SigninActivity", "Google Sign-In failed: ${exception?.localizedMessage}")
+                Toast.makeText(this, "Sign-in failed!", Toast.LENGTH_SHORT).show()
             }
         } catch (e: ApiException) {
             // Handle ApiException
             val errorMessage = e.localizedMessage ?: "Unknown error"
             Log.e("SigninActivity", "Google Sign-In failed: ${e.statusCode}, $errorMessage")
+            Toast.makeText(this, "Sign-in failed!", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // Handle other exceptions
             Log.e("SigninActivity", "Error during Google Sign-In: ${e.message}")
+            Toast.makeText(this, "Sign-in failed!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -114,8 +118,8 @@ class SigninActivity : AppCompatActivity() {
             val response = retService.login(requestBody)
             if (response.isSuccessful) {
                 // 요청 성공
-                Log.d("로그인 추가정보 통신 성공, 요청 성공", response.toString())
-                Log.d("로그인 추가정보 통신 성공, 요청 성공", response.body().toString())
+                Log.d("로그인 정보 통신 성공, 요청 성공", response.toString())
+                Log.d("로그인 정보 통신 성공, 요청 성공", response.body().toString())
                 //acessToken보내기
                 val myAccessToken = response.body()?.accessToken
 
@@ -134,7 +138,9 @@ class SigninActivity : AppCompatActivity() {
                     finish()
                 } else {
                     //MainActivity로 이동
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, SignUpActivity::class.java)
+                    //아래가 찐
+//                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                     finish()
                 }

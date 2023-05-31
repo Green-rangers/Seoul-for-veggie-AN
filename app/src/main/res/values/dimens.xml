@@ -14,6 +14,8 @@
     <dimen name="sign_up_font_hidden">14sp</dimen>
     <dimen name="sign_up_font_small">12sp</dimen>
 
+    <dimen name="bottom_sheet_height">400dp</dimen>
+
 
     <!-- size -->
     <dimen name="size_0">0dp</dimen>

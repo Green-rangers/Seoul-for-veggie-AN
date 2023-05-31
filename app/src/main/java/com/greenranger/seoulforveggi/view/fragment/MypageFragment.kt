@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.databinding.FragmentMypageBinding
 import com.greenranger.seoulforveggi.retrofit.APIS
 import com.greenranger.seoulforveggi.view.activity.SigninActivity
@@ -47,7 +48,8 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>() {
             binding.textView2.visibility = View.INVISIBLE
             binding.myNickName.visibility = View.INVISIBLE
         } else {
-            //로그인 정보 없음
+            //로그인 정보 있음
+            binding.myProfileImage.setImageResource(R.drawable.iv_logo_on)
             binding.goLogin.visibility = View.INVISIBLE
             binding.textView.visibility = View.VISIBLE
             binding.textView2.visibility = View.VISIBLE
