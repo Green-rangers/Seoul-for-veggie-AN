@@ -42,10 +42,4 @@ interface HomeService {
         @Body request: PostBookmark
     ): Response<PostBookmarkResponse>
 
-
-
-
-
-
-
 }

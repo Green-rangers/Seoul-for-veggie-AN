@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.greenranger.seoulforveggi.GlobalApplication
 import com.greenranger.seoulforveggi.R
@@ -14,7 +17,10 @@ import com.greenranger.seoulforveggi.data.model.request.PostBookmark
 import com.greenranger.seoulforveggi.data.network.HomeService
 import com.greenranger.seoulforveggi.databinding.FragmentDetailRestaurantBinding
 import com.greenranger.seoulforveggi.retrofit.RetrofitClient
+import com.greenranger.seoulforveggi.view.adapter.DetailViewAdapter
 import com.greenranger.seoulforveggi.view.base.BaseFragment
+import com.greenranger.seoulforveggi.view.factory.DetailViewModelFactory
+import com.greenranger.seoulforveggi.view.viewmodel.DetailViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +30,8 @@ class DetailRestaurantFragment : BaseFragment<FragmentDetailRestaurantBinding>()
 
     private lateinit var retService: HomeService
     private var accessToken: String = ""
+    private lateinit var viewModel: DetailViewModel
+    private lateinit var detailViewAdapter: DetailViewAdapter
 
     override fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentDetailRestaurantBinding {
         return FragmentDetailRestaurantBinding.inflate(inflater, container, false)
@@ -65,7 +73,29 @@ class DetailRestaurantFragment : BaseFragment<FragmentDetailRestaurantBinding>()
             }
         }
 
+        // RecyclerView
+        // ViewModel 초기화
+        val factory = DetailViewModelFactory(requireActivity().application, id)
+        viewModel = ViewModelProvider(this, factory).get(DetailViewModel::class.java)
 
+        detailViewAdapter = DetailViewAdapter { review ->
+            // Click event 처리
+
+        }
+
+        // RecyclerView 구성
+        binding.recyclerView.adapter = detailViewAdapter
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView.layoutManager = layoutManager
+
+        // ViewModel과 RecyclerView 어댑터 연결
+        viewModel.reviews.observe(viewLifecycleOwner, Observer { reviews ->
+            reviews?.let {
+                detailViewAdapter.updateReviews(it)
+            }
+        })
+
+        viewModel.fetchReviews(id)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {

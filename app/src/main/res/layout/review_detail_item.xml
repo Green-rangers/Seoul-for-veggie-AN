@@ -7,7 +7,7 @@
         android:id="@+id/cl_review_detail_item"
         android:layout_width="184dp"
         android:layout_height="216dp"
-        android:layout_margin="@dimen/size_4"
+        android:layout_margin="@dimen/size_16"
         android:background="@drawable/iv_review">
 
 
