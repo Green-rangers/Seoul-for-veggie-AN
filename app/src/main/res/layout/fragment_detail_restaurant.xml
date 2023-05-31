@@ -303,11 +303,11 @@
                         android:id="@+id/no_review"
                         android:layout_width="209dp"
                         android:layout_height="100dp"
-                        android:layout_margin="20dp"
+                        android:layout_marginTop="@dimen/size_60"
                         android:src="@drawable/iv_no_review"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_rating"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tv_rating" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"

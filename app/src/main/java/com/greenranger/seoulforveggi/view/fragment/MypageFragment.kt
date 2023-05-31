@@ -9,8 +9,8 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.greenranger.seoulforveggi.GlobalApplication
 import com.greenranger.seoulforveggi.R
+import com.greenranger.seoulforveggi.data.network.MypageService
 import com.greenranger.seoulforveggi.databinding.FragmentMypageBinding
-import com.greenranger.seoulforveggi.retrofit.APIS
 import com.greenranger.seoulforveggi.view.activity.MainActivity
 import com.greenranger.seoulforveggi.view.activity.SignUpActivity
 import com.greenranger.seoulforveggi.view.activity.SigninActivity
@@ -19,7 +19,7 @@ import com.greenranger.seoulforveggi.view.base.BaseFragment
 
 class MypageFragment : BaseFragment<FragmentMypageBinding>() {
 
-    private lateinit var retService: APIS
+    private lateinit var retService: MypageService
     private var accessToken = ""
     private var nickname = ""
     private var profileImage = ""
@@ -43,6 +43,20 @@ class MypageFragment : BaseFragment<FragmentMypageBinding>() {
         binding.goLogin.setOnClickListener {
             val intent = Intent(activity, SignUpActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.myPickLayout.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, MyPickFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        binding.myReviewLayout.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, MyReviewFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         //추후 로그인 정보 처리
