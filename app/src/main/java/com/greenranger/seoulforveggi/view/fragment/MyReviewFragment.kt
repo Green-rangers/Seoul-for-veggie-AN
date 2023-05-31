@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.greenranger.seoulforveggi.data.network.MypageService
 import com.greenranger.seoulforveggi.databinding.FragmentMyReviewBinding
-import com.greenranger.seoulforveggi.retrofit.APIS
+import com.greenranger.seoulforveggi.retrofit.RetrofitClient
 import com.greenranger.seoulforveggi.view.base.BaseFragment
 
 
 class MyReviewFragment : BaseFragment<FragmentMyReviewBinding>() {
 
 
-    private lateinit var retService: APIS
+    private lateinit var retService: MypageService
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -24,9 +25,14 @@ class MyReviewFragment : BaseFragment<FragmentMyReviewBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //retrofit
-//        retService = RetrofitClient
-//            .getRetrofitInstance()
-//            .create(APIS::class.java)
+        retService = RetrofitClient
+            .getRetrofitInstance()
+            .create(MypageService::class.java)
+
+
+
+
+
     }
 
 }
