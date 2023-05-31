@@ -1,11 +1,14 @@
 package com.greenranger.seoulforveggi.view.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -160,13 +163,30 @@ class SignUpActivity : AppCompatActivity() {
                 // 요청 실패
                 Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show()
                 Log.d("로그인 추가정보 통신 성공, 요청 실패", response.toString())
-                Log.d("인 추가정보 통신 성공, 요청 실패", response.body().toString())
+                Log.d("로그인 추가정보 통신 성공, 요청 실패", response.body().toString())
             }
         } catch (e: Exception) {
             // 네트워크 에러 또는 예외 발생
             Toast.makeText(this, "Sign up failed.", Toast.LENGTH_SHORT).show()
             Log.d("로그인 추가정보 통신 실패", "전송 실패")
         }
+    }
+    // 키보드 숨기기 함수
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    // Dispatch touch event for hiding keyboard when touching outside
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            currentFocus?.let { focus ->
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(focus.windowToken, 0)
+                focus.clearFocus()
+            }
+        }
+        return super.dispatchTouchEvent(event)
     }
 }
 

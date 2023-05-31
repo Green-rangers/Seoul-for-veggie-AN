@@ -191,7 +191,7 @@
 
 
         <EditText
-            android:id="@+id/search_text"
+            android:id="@+id/review_text"
             android:layout_width="match_parent"
             android:layout_height="196dp"
             android:background="@drawable/bg_review_radius"
@@ -215,7 +215,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:src="@drawable/btn_save"
-            android:layout_marginBottom="@dimen/layout_margin_start"
+            android:layout_marginBottom="@dimen/size_70"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 

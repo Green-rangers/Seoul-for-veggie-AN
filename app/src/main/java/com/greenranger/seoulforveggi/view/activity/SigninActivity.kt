@@ -138,9 +138,7 @@ class SigninActivity : AppCompatActivity() {
                     finish()
                 } else {
                     //MainActivity로 이동
-                    val intent = Intent(this, SignUpActivity::class.java)
-                    //아래가 찐
-//                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                     finish()
                 }

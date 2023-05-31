@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.greenranger.seoulforveggi.GlobalApplication
+import com.greenranger.seoulforveggi.R
 import com.greenranger.seoulforveggi.data.network.HomeService
 import com.greenranger.seoulforveggi.databinding.FragmentRecommendRestaurantBinding
 import com.greenranger.seoulforveggi.retrofit.RetrofitClient
@@ -49,7 +50,8 @@ class RecommendRestaurantFragment : BaseFragment<FragmentRecommendRestaurantBind
             // Click event 처리
             val bundle = Bundle()
             val placeId = place.id
-            // openPlaceDetailFragment(placeId)
+            GlobalApplication.prefs.setString("placeId", placeId.toString())
+             openPlaceDetailFragment(placeId)
         }
 
         // RecyclerView 구성
@@ -64,5 +66,19 @@ class RecommendRestaurantFragment : BaseFragment<FragmentRecommendRestaurantBind
         })
 
         viewModel.fetchPlaces(myCategory, myLatitude, myLongitude)
+    }
+
+    private fun openPlaceDetailFragment(id: Int) {
+        val detailRestaurantFragment = DetailRestaurantFragment()
+
+        val bundle = Bundle().apply {
+            putInt("id", id)
+        }
+        detailRestaurantFragment.arguments = bundle
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, detailRestaurantFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
