@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.greenranger.seoulforveggi.R
 
 class SplashActivity : AppCompatActivity() {
-    private val SPLASH_TIME_OUT: Long = 3000 // 스플래시 화면이 표시될 시간 (3초)
+    private val SPLASH_TIME_OUT: Long = 2000 // 스플래시 화면이 표시될 시간 (2초)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

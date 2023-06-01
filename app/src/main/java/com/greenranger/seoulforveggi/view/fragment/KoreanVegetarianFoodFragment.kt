@@ -22,10 +22,10 @@ class KoreanVegetarianFoodFragment :  BaseFragment<FragmentKoreanVegetarianFoodB
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //retrofit
-//        retService = RetrofitClient
-//            .getRetrofitInstance()
-//            .create(APIS::class.java)
+
+        binding.imageButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
 }

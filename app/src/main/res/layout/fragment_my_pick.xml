@@ -6,7 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#F6FBF9"
         android:paddingBottom="@dimen/size_70">
 
@@ -51,10 +51,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
-            tools:listitem="@layout/review_item" />
+            tools:listitem="@layout/review_item"
+            android:paddingBottom="@dimen/size_70"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -117,39 +117,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //서버에 요청
             category = "All"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "a")
+            GlobalApplication.prefs.setString("myCategory", " ")
         }
         binding.chinese.setOnClickListener {
             onViewClicked(binding.chinese)
             binding.categories.text = "Chinese Food"
             //서버에 요청
-            category = "ChineseFood"
+            category = "Chinese Food"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "ChineseFood")
+            GlobalApplication.prefs.setString("myCategory", "Chinese Food")
         }
         binding.western.setOnClickListener {
             onViewClicked(binding.western)
             binding.categories.text = "Western Food"
             //서버에 요청
-            category = "WesternFood"
+            category = "Western Food"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "WesternFood")
+            GlobalApplication.prefs.setString("myCategory", "Western Food")
         }
         binding.asian.setOnClickListener {
             onViewClicked(binding.asian)
             binding.categories.text = "Asian Food"
             //서버에 요청
-            category = "AseanFood"
+            category = "Asian Food"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "AseanFood")
+            GlobalApplication.prefs.setString("myCategory", "Asian Food")
         }
         binding.eastern.setOnClickListener {
             onViewClicked(binding.eastern)
-            binding.categories.text = "Middle Eastern Food"
+            binding.categories.text = "Middle Eastern"
             //서버에 요청
-            category = "MiddleEastern"
+            category = "Middle Eastern"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "MiddleEastern")
+            GlobalApplication.prefs.setString("myCategory", "Middle Eastern")
         }
         binding.bakery.setOnClickListener {
             onViewClicked(binding.bakery)
@@ -171,9 +171,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             onViewClicked(binding.mexican)
             binding.categories.text = "Mexican Food"
             //서버에 요청
-            category = "MexicanFood"
+            category = "Mexican Food"
             callRestaurantListAPI(category, homelatitude, homelongitude)
-            GlobalApplication.prefs.setString("myCategory", "MexicanFood")
+            GlobalApplication.prefs.setString("myCategory", "Mexican Food")
         }
         binding.salad.setOnClickListener {
             onViewClicked(binding.salad)

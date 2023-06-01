@@ -47,9 +47,10 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
             .create(HomeService::class.java)
 
         binding.btnGoSeeMore.setOnClickListener {
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(this.id, KoreanVegetarianFoodFragment())
-            transaction?.commit()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, KoreanVegetarianFoodFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.viewall.setOnClickListener {
@@ -58,7 +59,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
             transaction?.commit()
         }
 
-        val category = "KoreanFood"
+        val category = "Korean Food"
         callRestaurantListAPI(category, myLatitude, myLongitude)
 
         //detailFragment로 이동

@@ -54,7 +54,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
-            tools:listitem="@layout/my_review_item" />
+            tools:listitem="@layout/my_review_item"
+            android:paddingBottom="@dimen/size_70" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
