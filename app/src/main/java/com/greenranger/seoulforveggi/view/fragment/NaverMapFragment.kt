@@ -61,8 +61,8 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val myLatitude = GlobalApplication.prefs.getString("myLatitude", "")
-        val myLongitude = GlobalApplication.prefs.getString("myLongitude", "")
+        val myLatitude = GlobalApplication.prefs.getString("myLatitude", "37")
+        val myLongitude = GlobalApplication.prefs.getString("myLongitude", "126")
         var myState = GlobalApplication.prefs.getString("myState", "0")
 
         // Retrofit
@@ -79,6 +79,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
         binding.floatingActionButton.setOnClickListener {
             myState = "1"
+            GlobalApplication.prefs.setString("myCategory", " ")
             GlobalApplication.prefs.setString("myState", myState)
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, RecommendRestaurantFragment())
@@ -252,19 +253,25 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
     @SuppressLint("MissingPermission")
     private fun setUpdateLocationListener() {
         val locationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //정확도 높게
-            interval = 10000 //10초에 한번씩 GPS 요청
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            interval = 10000
         }
 
         val locationCallback = object : LocationCallback() {
             override fun onLocationResult(result: LocationResult?) {
                 if (result == null) return
                 for (location in result.locations) {
-                    Log.d("location: ", "${location.latitude}, ${location.longitude}")
-                    GlobalApplication.prefs.setString("myLatitude", location.latitude.toString())
-                    GlobalApplication.prefs.setString("myLongitude", location.longitude.toString())
+                    val latitude = location.latitude.toString()
+                    val longitude = location.longitude.toString()
+
+                    Log.d("location: ", "$latitude, $longitude")
+                    GlobalApplication.prefs.setString("myLatitude", latitude)
+                    GlobalApplication.prefs.setString("myLongitude", longitude)
+
+                    // Update server with new latitude and longitude
+                    updateServerWithLocation(latitude, longitude)
+
                     setLastLocation(location)
-                    //현재위치 파란점으로 나타내기
                     naverMap.locationOverlay.run {
                         isVisible = true
                         position = LatLng(location.latitude, location.longitude)
@@ -273,7 +280,6 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
             }
         }
 
-        //좌표계를 주기적으로 갱신
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
@@ -320,6 +326,54 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
                         "Naver map 통신 실패",
                         "Error: ${response.code()} ${response.message()}"
                     )
+                }
+            } catch (e: Exception) {
+                // Exception handling
+                Log.e("Naver map 통신 실패2", "Exception: ${e.message}")
+            }
+        }
+    }
+    private fun updateServerWithLocation(latitude: String, longitude: String) {
+        lifecycleScope.launch {
+            try {
+                val response = retService.getMap(latitude.toDouble(), longitude.toDouble())
+                if (response.isSuccessful) {
+                    Log.d(
+                        "Naver map 성공 보낸 data",
+                        "Success, latitude: $latitude, longitude: $longitude"
+                    )
+                    val mapData = response.body()?.markerInfoList
+
+                    if (mapData != null) {
+                        for (markerInfo in mapData) {
+                            val marker = Marker()
+                            marker.position = LatLng(markerInfo.latitude, markerInfo.longitude)
+                            marker.tag = markerInfo.id
+
+                            // Customize marker appearance
+                            val customIcon = OverlayImage.fromResource(R.drawable.ic_my_mark)
+                            marker.icon = customIcon
+
+                            // 마커 클릭 이벤트 리스너 설정
+                            marker.setOnClickListener { overlay ->
+                                if (overlay is Marker) {
+                                    val markerId = overlay.tag as? Int
+                                    // 마커 클릭 시 실행 동작
+                                    markerId?.let { id ->
+                                        binding.cardView.visibility = View.VISIBLE
+                                        fetchMarkerData(id, latitude.toDouble(), longitude.toDouble())
+                                        markerIdLiveData.value = id
+                                    }
+                                }
+                                true
+                            }
+
+                            marker.map = naverMap
+                        }
+                    }
+                } else {
+                    // Error handling
+                    Log.e("Naver map 통신 실패", "Error: ${response.code()} ${response.message()}")
                 }
             } catch (e: Exception) {
                 // Exception handling
