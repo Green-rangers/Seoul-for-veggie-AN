@@ -23,6 +23,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
     var id2: Int = 1
     var id3: Int = 1
     var id4: Int = 1
+    private var accessToken = GlobalApplication.prefs.getString("userAccessToken", "")
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -33,6 +34,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        GlobalApplication.prefs.setString("myState", "0")
 
         val myLatitude = GlobalApplication.prefs.getString("myLatitude", "37").toDouble()
         val myLongitude = GlobalApplication.prefs.getString("myLongitude", "126").toDouble()
@@ -78,7 +80,7 @@ class KveganFragment : BaseFragment<FragmentKveganBinding>() {
     private fun callRestaurantListAPI(category: String, latitude: Double, longitude: Double){
         lifecycleScope.launch {
             try {
-                val response = retService.homeCategory(category, latitude, longitude)
+                val response = retService.homeCategory("Bearer $accessToken",category, latitude, longitude)
                 if (response.isSuccessful) {
                     Log.d("Home", "Success, category: $category, latitude: $latitude, longitude: $longitude")
                     val restaurantListData = response.body()?.restaurantList

@@ -11,25 +11,46 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.UiThread
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.google.android.gms.location.*
+import com.greenranger.seoulforveggi.GlobalApplication
 import com.greenranger.seoulforveggi.R
+import com.greenranger.seoulforveggi.data.network.HomeService
 import com.greenranger.seoulforveggi.databinding.FragmentNaverMapBinding
+import com.greenranger.seoulforveggi.retrofit.RetrofitClient
 import com.greenranger.seoulforveggi.view.base.BaseFragment
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.launch
 
 class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var retService: HomeService
+    private val markerIdLiveData = MutableLiveData<Int>()
+    private var placeId: Int = 1
 
     var permissions = arrayOf(
         android.Manifest.permission.ACCESS_FINE_LOCATION,
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
-    val permission_request = 99
+    val permissionRequest = 99
+
+    private val markerDataLiveData = MutableLiveData<MarkerData>()
+
+    data class MarkerData(
+        val name: String,
+        val address: String,
+        val category: String,
+        val distance: String,
+        val imageLink: String
+    )
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -40,12 +61,29 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val myLatitude = GlobalApplication.prefs.getString("myLatitude", "")
+        val myLongitude = GlobalApplication.prefs.getString("myLongitude", "")
+        var myState = GlobalApplication.prefs.getString("myState", "0")
+
+        // Retrofit
+        retService = RetrofitClient
+            .getRetrofitInstance()
+            .create(HomeService::class.java)
 
         // Check permissions
         if (isPermitted()) {
             startProcess()
         } else {
-            requestPermissions(permissions, permission_request)
+            requestPermissions(permissions, permissionRequest)
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            myState = "1"
+            GlobalApplication.prefs.setString("myState", myState)
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, RecommendRestaurantFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         NaverMapSdk.getInstance(requireContext()).client =
@@ -53,10 +91,79 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
         binding.cardView.visibility = View.GONE
 
+        lifecycleScope.launch {
+            try {
+                val response = retService.getMap(myLatitude.toDouble(), myLongitude.toDouble())
+                if (response.isSuccessful) {
+                    Log.d(
+                        "Naver map 성공 보낸 data",
+                        "Success, latitude: $myLatitude, longitude: $myLongitude"
+                    )
+                    val mapData = response.body()?.markerInfoList
+
+                    if (mapData != null) {
+                        for (markerInfo in mapData) {
+                            val marker = Marker()
+                            marker.position = LatLng(markerInfo.latitude, markerInfo.longitude)
+                            marker.tag = markerInfo.id
+
+                            // Customize marker appearance
+                            val customIcon = OverlayImage.fromResource(R.drawable.ic_my_mark)
+                            marker.icon = customIcon
+
+                            // 마커 클릭 이벤트 리스너 설정
+                            marker.setOnClickListener { overlay ->
+                                if (overlay is Marker) {
+                                    val markerId = overlay.tag as? Int
+                                    // 마커 클릭 시 실행 동작
+                                    markerId?.let { id ->
+                                        binding.cardView.visibility = View.VISIBLE
+                                        fetchMarkerData(id, myLatitude.toDouble(), myLongitude.toDouble())
+                                        markerIdLiveData.value = id
+                                    }
+                                }
+                                true
+                            }
+
+                            marker.map = naverMap
+                        }
+                    }
+                } else {
+                    // Error handling
+                    Log.e("Naver map 통신 실패", "Error: ${response.code()} ${response.message()}")
+                }
+            } catch (e: Exception) {
+                // Exception handling
+                Log.e("Naver map 통신 실패2", "Exception: ${e.message}")
+            }
+        }
+
+        // Observe the marker data LiveData
+        markerDataLiveData.observe(viewLifecycleOwner) { markerData ->
+            // Update UI with marker data
+            binding.tvName.text = markerData.name.chunked(20).joinToString("\n")
+            binding.tvAddress.text = markerData.address.chunked(28).joinToString("\n")
+            binding.tvCategory.text = markerData.category
+            binding.distance.text = markerData.distance.toString()
+            Glide.with(requireContext())
+                .load(markerData.imageLink)
+                .into(binding.ivRestaurantImage)
+        }
+        // Observe the marker ID LiveData
+        markerIdLiveData.observe(viewLifecycleOwner) { markerId ->
+            placeId = markerId
+        }
+        binding.cardView.setOnClickListener{
+            GlobalApplication.prefs.setString("placeId","$placeId")
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, DetailRestaurantFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     // Check if permissions are granted
-    fun isPermitted(): Boolean {
+    private fun isPermitted(): Boolean {
         for (perm in permissions) {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -70,7 +177,7 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
     }
 
     // Load the map if permissions are granted
-    fun startProcess() {
+    private fun startProcess() {
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.mapView) as MapFragment?
             ?: MapFragment.newInstance().also {
@@ -79,16 +186,15 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
         mapFragment.getMapAsync(this)
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == permission_request) {
+        if (requestCode == permissionRequest) {
             if (isPermitted()) {
-//                startProcess()
+                //startProcess()
             } else {
                 requireActivity().finish()
             }
@@ -97,7 +203,6 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
     @UiThread
     override fun onMapReady(naverMap: NaverMap) {
-
         val cameraPosition = CameraPosition(
             LatLng(37.5666102, 126.9783881),  // 위치 지정
             16.0 // 줌 레벨
@@ -139,22 +244,14 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
         binding.mapView.onStop()
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        binding.mapView.onDestroy()
-//    }
-
     override fun onLowMemory() {
         super.onLowMemory()
         binding.mapView.onLowMemory()
     }
 
-
-
     @SuppressLint("MissingPermission")
-    fun setUpdateLocationListener() {
-        val locationRequest = LocationRequest.create()
-        locationRequest.run {
+    private fun setUpdateLocationListener() {
+        val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY //정확도 높게
             interval = 10000 //10초에 한번씩 GPS 요청
         }
@@ -164,11 +261,13 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
                 if (result == null) return
                 for (location in result.locations) {
                     Log.d("location: ", "${location.latitude}, ${location.longitude}")
+                    GlobalApplication.prefs.setString("myLatitude", location.latitude.toString())
+                    GlobalApplication.prefs.setString("myLongitude", location.longitude.toString())
                     setLastLocation(location)
                     //현재위치 파란점으로 나타내기
                     naverMap.locationOverlay.run {
                         isVisible = true
-                        position = LatLng(location!!.latitude, location.longitude)
+                        position = LatLng(location.latitude, location.longitude)
                     }
                 }
             }
@@ -182,12 +281,11 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
         )
     }
 
-    fun setLastLocation(location: Location) {
+    private fun setLastLocation(location: Location) {
         val myLocation = LatLng(location.latitude, location.longitude)
         val marker = Marker()
         marker.position = myLocation
 
-//        marker.map = naverMap
         //마커
         val cameraUpdate = CameraUpdate.scrollTo(myLocation)
         naverMap.moveCamera(cameraUpdate)
@@ -196,7 +294,37 @@ class NaverMapFragment : BaseFragment<FragmentNaverMapBinding>(), OnMapReadyCall
 
         marker.map = null
     }
+
+    private fun fetchMarkerData(markerId: Int, latitude: Double, longitude: Double) {
+        lifecycleScope.launch {
+            try {
+                val response = retService.getMarker(markerId, latitude, longitude)
+                if (response.isSuccessful) {
+                    Log.d(
+                        "Naver map 성공 보낸 data",
+                        "Success, latitude: $latitude, longitude: $longitude"
+                    )
+                    val markerData = response.body()
+                    markerData?.let {
+                        markerDataLiveData.value = MarkerData(
+                            it.name,
+                            it.address,
+                            it.category,
+                            it.distance.toString(),
+                            it.imageLink
+                        )
+                    }
+                } else {
+                    // Error handling
+                    Log.e(
+                        "Naver map 통신 실패",
+                        "Error: ${response.code()} ${response.message()}"
+                    )
+                }
+            } catch (e: Exception) {
+                // Exception handling
+                Log.e("Naver map 통신 실패2", "Exception: ${e.message}")
+            }
+        }
+    }
 }
-   
-
-
