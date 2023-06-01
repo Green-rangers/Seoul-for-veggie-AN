@@ -99,7 +99,7 @@ class DetailRestaurantFragment : BaseFragment<FragmentDetailRestaurantBinding>()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = retService.restaurantDetail(id)
+                val response = retService.restaurantDetail("Bearer $accessToken",id)
                 if (response.isSuccessful) {
                     val detailResponse = response.body()
                     // Access the data from detailResponse and update the UI accordingly

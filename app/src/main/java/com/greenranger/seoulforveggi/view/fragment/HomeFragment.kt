@@ -49,6 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     var id3: Int = 1
     var id4: Int = 1
     private var category: String = "a"
+    private var accessToken = GlobalApplication.prefs.getString("userAccessToken", "")
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
@@ -60,7 +61,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var detailFragment: DetailRestaurantFragment? = null
-        GlobalApplication.prefs.setString("myCategory", "a")
+        GlobalApplication.prefs.setString("myCategory", " ")
+        GlobalApplication.prefs.setString("myState", "0")
 
         // 위치 관리자 초기화
         locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -91,8 +93,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 val enteredText = binding.searchText.text.toString()
                 // 여기서 enteredText를 저장하거나 처리합니다.
                 // 예를 들어, ViewModel이나 SharedPreferences를 사용하여 저장할 수 있습니다.
-                Toast.makeText(requireContext(), "입력된 값: $enteredText", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), "입력된 값: $enteredText", Toast.LENGTH_SHORT).show()
                 GlobalApplication.prefs.setString("myCategory", enteredText)
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, RecommendRestaurantFragment())
+                    .addToBackStack(null)
+                    .commit()
 
                 return@setOnEditorActionListener true
             }
@@ -286,6 +292,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         val myLatitude = homelatitude.toString()
         val myLongitude = homelongitude.toString()
 
+        GlobalApplication.prefs.setString("myLatitude", myLatitude)
+        GlobalApplication.prefs.setString("myLongitude", myLongitude)
+
         Log.d("Home : MyLocation1", "Latitude: $myLatitude, Longitude: $myLongitude")
 
         // 위치 정보
@@ -332,12 +341,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun callRestaurantListAPI(category: String, latitude: Double, longitude: Double){
         lifecycleScope.launch {
             try {
-                val response = retService.homeCategory(category, latitude, longitude)
+                val response = retService.homeCategory("Bearer $accessToken",category, latitude, longitude)
                 if (response.isSuccessful) {
                     Log.d("Home", "Success, category: $category, latitude: $latitude, longitude: $longitude")
                     val restaurantListData = response.body()?.restaurantList
                     // Data processing
-                    Log.d("Home", "${restaurantListData.toString()}")
+                    Log.d("Home", "restaurantListData.toString()")
 
                     val chunkSize = 17
 

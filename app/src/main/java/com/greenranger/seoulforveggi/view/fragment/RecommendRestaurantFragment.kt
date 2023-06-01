@@ -34,8 +34,30 @@ class RecommendRestaurantFragment : BaseFragment<FragmentRecommendRestaurantBind
         val myCategory = GlobalApplication.prefs.getString("myCategory", "All")
         val myLatitude = GlobalApplication.prefs.getString("myLatitude", "37")?.toDoubleOrNull() ?: 37.0
         val myLongitude = GlobalApplication.prefs.getString("myLongitude", "126")?.toDoubleOrNull() ?: 126.0
+        var myState = GlobalApplication.prefs.getString("myState", "0")
+        if (myState == "0") {
+            binding.floatingActionButton.visibility = View.GONE
+            binding.constraintLayout8.visibility = View.GONE
+        } else {
+            //맵 버튼 눌렀을 때
+            binding.constraintLayout1.visibility = View.VISIBLE
+            binding.categories.visibility = View.VISIBLE
+            binding.categories.text = "Vegan Restaurants"
+            binding.floatingActionButton.visibility = View.VISIBLE
+            binding.constraintLayout8.visibility = View.VISIBLE
+            binding.floatingActionButton.setOnClickListener {
+                GlobalApplication.prefs.setString("myState", "0")
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, NaverMapFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
+        }
 
         binding.categories.text = myCategory
+        if(myCategory == " ") {
+            binding.categories.text = "Vegan Restaurants"
+        }
         Log.d("RecommendRestaurant", "myCategory: $myCategory")
 
         // Retrofit
@@ -66,6 +88,10 @@ class RecommendRestaurantFragment : BaseFragment<FragmentRecommendRestaurantBind
         })
 
         viewModel.fetchPlaces(myCategory, myLatitude, myLongitude)
+
+        binding.imageButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun openPlaceDetailFragment(id: Int) {

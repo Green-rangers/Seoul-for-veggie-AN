@@ -64,6 +64,10 @@ class MyPickFragment : BaseFragment<FragmentMyPickBinding>() {
 
         viewModel.fetchReviews(accessToken)
 
+        binding.imageButton.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
     }
 
     private fun openPlaceDetailFragment(id: Int) {

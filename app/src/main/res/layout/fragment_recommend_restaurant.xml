@@ -7,7 +7,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#F6FBF9">
+        android:background="#F6FBF9"
+        android:paddingBottom="@dimen/size_70">
 
         <!-- 상단바 -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,14 +46,36 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1" />
+
+        <ImageView
+            android:id="@+id/floatingActionButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/size_70"
+            android:src="@drawable/ic_toggle_list"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout1" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/size_50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
             tools:listitem="@layout/recommendation_item" />
 
 

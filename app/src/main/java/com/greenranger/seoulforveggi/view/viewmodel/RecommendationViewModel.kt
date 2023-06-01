@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.greenranger.seoulforveggi.GlobalApplication
 import com.greenranger.seoulforveggi.data.model.response.RecommendationResponse
 import com.greenranger.seoulforveggi.data.network.HomeService
 import com.greenranger.seoulforveggi.retrofit.RetrofitClient
@@ -21,6 +22,7 @@ class RecommendationViewModel(
     private lateinit var retService: HomeService
     private val _places = MutableLiveData<List<RecommendationResponse.Restaurant>>()
     val places: LiveData<List<RecommendationResponse.Restaurant>> = _places
+    val accessToken = GlobalApplication.prefs.getString("userAccessToken", "")
 
     init {
         fetchPlaces(keyword, latitude, longitude)
@@ -31,7 +33,7 @@ class RecommendationViewModel(
 
         viewModelScope.launch {
             try {
-                val response = retService.recommendationRestaurant(keyword, latitude, longitude)
+                val response = retService.recommendationRestaurant("Bearer $accessToken",keyword, latitude, longitude)
                 if (response.isSuccessful) {
                     val data = response.body()?.restaurantList
                     Log.d("RecommendationViewModel", "Fetch places success")
